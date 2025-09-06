@@ -12,7 +12,7 @@ HTML/CSS/JS 정적 프론트로 가볍게 동작하며, 공개 배포/에브리�
   <img alt="CI" src="https://img.shields.io/badge/GitHub%20Actions-CI-2088FF?logo=githubactions" />
 </p>
 
-> 📌 **레포 이름 예시**: `spring-campus-timetable` / 루트 패키지: `io.github.<YOUR_ID>.timetable`
+> 📌 **레포 이름**: `class-schedule-generator` / 루트 패키지: `io.github.Eunseo-ee.class-schedule-generator`
 
 ---
 
@@ -105,7 +105,7 @@ Static Frontend (HTML/CSS/JS) → fetch('/api/**')
 
 ### 요구 사항
 
-* JDK 21(또는 17), Docker(Compose), Gradle Wrapper
+* JDK 21, Docker(Compose), Gradle Wrapper
 
 ### 1) 환경 변수
 
