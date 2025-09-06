@@ -24,7 +24,7 @@ body:
     id: dod
     attributes:
       label: Definition of Done
-      description: 체크리스트로 작성해 주세요. (예: API/테스트/문서/UX 시나리오 등)
+      description: 체크리스트로 작성해주세요. (ex. API/테스트/문서/UX 시나리오 등)
       placeholder: |
         - [ ] API 스펙 확정 및 Swagger 예시 추가
         - [ ] 조합 스코어 정렬 옵션(GAP_DESC) 구현 및 단위 테스트
