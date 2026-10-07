@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Raw lecture data (크롤링/수집한 강의 정보 원본 파일) ###
+data/raw/
