@@ -66,11 +66,11 @@ def fetch_schedule(sp_ymst: str, dn_div: str = "") -> dict:
         "fsp_action": "GridAction",
         "fsp_cmd": "getScheduleGridData",
         "SP_YMST": sp_ymst,
-        "LESS_CD": "",  # 학과 코드. 비우면 전체 학과.
+        "LESS_CD": "",     # 학과 코드. 비우면 전체 학과.
         "DN_DIV": dn_div,  # 주간/야간. 비우면 전체.
         "SUBJ_NM": "",
         "LECT_DIV": "",
-        "DOTW_CD": "",  # 요일. 비우면 전체 요일.
+        "DOTW_CD": "",     # 요일. 비우면 전체 요일.
     }
     headers = {
         "Content-Type": "application/json;charset=UTF-8",
@@ -83,16 +83,12 @@ def fetch_schedule(sp_ymst: str, dn_div: str = "") -> dict:
     data = response.json()
 
     if data.get("ErrorCode") != "0":
-        raise RuntimeError(
-            f"API 오류 응답: {data.get('ErrorMsg')} (code={data.get('ErrorCode')})"
-        )
+        raise RuntimeError(f"API 오류 응답: {data.get('ErrorMsg')} (code={data.get('ErrorCode')})")
 
     return data
 
 
-def save_raw(
-    data: dict, out_dir: Path, sp_ymst: str, year: int, semester: int, dn_div_key: str
-) -> Path:
+def save_raw(data: dict, out_dir: Path, sp_ymst: str, year: int, semester: int, dn_div_key: str) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"schedule_raw_{sp_ymst}.json"
 
@@ -110,9 +106,7 @@ def save_raw(
         "response": data,
     }
 
-    out_path.write_text(
-        json.dumps(wrapped, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    out_path.write_text(json.dumps(wrapped, ensure_ascii=False, indent=2), encoding="utf-8")
     return out_path
 
 
@@ -146,9 +140,7 @@ def main() -> int:
     sp_ymst = build_sp_ymst(args.year, args.semester)
     dn_div = DN_DIV_CODES[args.daynight]
 
-    print(
-        f"[fetch] {args.year}년 {SEMESTER_NAMES[args.semester]} (SP_YMST={sp_ymst}) 시간표 요청 중..."
-    )
+    print(f"[fetch] {args.year}년 {SEMESTER_NAMES[args.semester]} (SP_YMST={sp_ymst}) 시간표 요청 중...")
     try:
         data = fetch_schedule(sp_ymst, dn_div)
     except requests.RequestException as e:
@@ -161,9 +153,7 @@ def main() -> int:
     record_count = data.get("records")
     print(f"[fetch] 완료: {record_count}건 수신")
 
-    out_path = save_raw(
-        data, args.out_dir, sp_ymst, args.year, args.semester, args.daynight
-    )
+    out_path = save_raw(data, args.out_dir, sp_ymst, args.year, args.semester, args.daynight)
     print(f"[save] 원본 저장 완료: {out_path.resolve()}")
 
     return 0
