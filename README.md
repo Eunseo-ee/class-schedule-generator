@@ -133,6 +133,31 @@ Swagger: `/swagger-ui/index.html`
 
 Swagger: `http://localhost:8080/swagger-ui/index.html`
 
+## 로컬 개발 환경 (MySQL / Docker)
+
+### 처음 한 번
+1. Docker Desktop 실행
+2. `.env.example`을 복사해 `.env` 생성 후 비밀번호 수정
+```powershell
+   Copy-Item .env.example .env
+```
+3. 3306 포트를 이미 쓰고 있다면 `.env`의 `MYSQL_PORT`를 `3307` 등으로 변경
+   - 확인: `netstat -ano | findstr :3306`
+
+### 자주 쓰는 명령어 (프로젝트 루트에서 실행)
+| 명령어 | 설명 |
+|---|---|
+| `docker compose up -d` | DB 시작 (백그라운드) |
+| `docker compose ps` | 상태 확인 (`healthy`면 준비 완료) |
+| `docker compose logs db` | 로그 확인 |
+| `docker compose exec db mysql -u<유저> -p <DB명>` | MySQL 접속 |
+| `docker compose down` | 중지 (데이터 유지) |
+| `docker compose down -v` | 중지 + 데이터 삭제 (DB 초기화) |
+
+### 주의
+- DB 데이터는 컴퓨터마다 따로 저장된다. 다른 컴퓨터에서는 스키마 생성과 데이터 적재를 다시 해야 한다.
+- 호스트에서 접속할 때(Spring, DB 클라이언트)는 `.env`의 `MYSQL_PORT`를 사용한다.
+
 ---
 
 ## 🗺️ 로드맵
