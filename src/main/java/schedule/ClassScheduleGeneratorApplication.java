@@ -1,4 +1,4 @@
-package com.github.Eunseo_ee.class_schedule_generator;
+package schedule;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
